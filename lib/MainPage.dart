@@ -271,7 +271,9 @@ class _MainPage extends State<MainPage> {
       ),
       body: ListView(
         children: [
-
+          SizedBox(
+            height: 50.0,
+          ),
           SwitchListTile(
               title: const Text('Turn on bluetooth'),
               value: _bluetoothState.isEnabled,
@@ -300,6 +302,7 @@ class _MainPage extends State<MainPage> {
                 }
             ),
           ),
+          Divider(),
           Center(
             child: Card(
               elevation: 1,
@@ -349,7 +352,7 @@ class _MainPage extends State<MainPage> {
 
                           },
                               icon: Image.asset('assets/images/wifiPhoneGrey.png'),
-                            iconSize: 50,
+                            iconSize: 65,
                           ),
                         ],
                       ),
@@ -399,99 +402,98 @@ class _MainPage extends State<MainPage> {
               ),
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top:40),
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-
-                Card(
-                  elevation: 1,
-                  shape: const RoundedRectangleBorder(
-                    side: BorderSide(
-                      color: Colors.black,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 340,
-                      height: 210,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Text(
-                                'Hermes Devices',
-                                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Text(
-                                  'Message Here')
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                Text("Current Volume: ${(_currentSoundValue * 100).toInt()}"),
-
-                const Divider(),
-
-                Slider(
-                  value: _currentSoundValue,
-                  label: '${(_currentSoundValue * 100).toInt()}',
-                  onChanged: (newvol){
-                    _currentSoundValue = newvol;
-                    PerfectVolumeControl.setVolume(newvol);
-                    //set new volume
-                    setState(() {
-                      // _currentSoundValue = newvol;
-                    });
-                  },
-                  min: 0, //
-                  max:  1,
-                  divisions: 10,
-                ),
-
-                const Divider(
-                  height: 50.0,
-                  color: Colors.white,
-                ),
-
-                const Text("LED"),
-                const Divider(),
-                Slider(
-                  min: 0.0,
-                  max: 100.0,
-                  value: _currentLEDValue,
-                  divisions: 5,
-                  label: '${_currentLEDValue.round()}',
-                  onChanged: (value) {
-                    setState(() {
-                      _currentLEDValue = value;
-                    });
-                  },
-                ),
-                TextFormField(
-                  textAlign: TextAlign.center,
-                  controller: _textEditingController,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      speak(_textEditingController.text);
-                    },
-                    child: const Text('Speak')),
-              ]
-              ,
-            ),
-          ),
+          // Container(
+          //   margin: const EdgeInsets.only(top:40),
+          //   padding: const EdgeInsets.all(20),
+          //   child: Column(
+          //     children: [
+          //
+          //       Card(
+          //         elevation: 1,
+          //         shape: const RoundedRectangleBorder(
+          //           side: BorderSide(
+          //             color: Colors.black,
+          //           ),
+          //           borderRadius: BorderRadius.all(Radius.circular(12)),
+          //         ),
+          //         child: Padding(
+          //           padding: const EdgeInsets.all(8.0),
+          //           child: SizedBox(
+          //             width: 340,
+          //             height: 210,
+          //             child: Column(
+          //               children: [
+          //                 Row(
+          //                   mainAxisAlignment: MainAxisAlignment.center,
+          //                   children: const [
+          //                     Text(
+          //                       'Hermes Devices',
+          //                       style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          //                     ),
+          //                   ],
+          //                 ),
+          //                 const SizedBox(
+          //                   height: 50,
+          //                 ),
+          //                 Text(
+          //                         'Message Here')
+          //               ],
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //
+          //       Text("Current Volume: ${(_currentSoundValue * 100).toInt()}"),
+          //
+          //       const Divider(),
+          //
+          //       Slider(
+          //         value: _currentSoundValue,
+          //         label: '${(_currentSoundValue * 100).toInt()}',
+          //         onChanged: (newvol){
+          //           _currentSoundValue = newvol;
+          //           PerfectVolumeControl.setVolume(newvol);
+          //           //set new volume
+          //           setState(() {
+          //             // _currentSoundValue = newvol;
+          //           });
+          //         },
+          //         min: 0, //
+          //         max:  1,
+          //         divisions: 10,
+          //       ),
+          //
+          //       const Divider(
+          //         height: 50.0,
+          //         color: Colors.white,
+          //       ),
+          //
+          //       const Text("LED"),
+          //       const Divider(),
+          //       Slider(
+          //         min: 0.0,
+          //         max: 100.0,
+          //         value: _currentLEDValue,
+          //         divisions: 5,
+          //         label: '${_currentLEDValue.round()}',
+          //         onChanged: (value) {
+          //           setState(() {
+          //             _currentLEDValue = value;
+          //           });
+          //         },
+          //       ),
+          //       // TextFormField(
+          //       //   textAlign: TextAlign.center,
+          //       //   controller: _textEditingController,
+          //       // ),
+          //       // ElevatedButton(
+          //       //     onPressed: () {
+          //       //       speak(_textEditingController.text);
+          //       //     },
+          //       //     child: const Text('Speak')),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:perfect_volume_control/perfect_volume_control.dart';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
@@ -31,6 +32,10 @@ class _LED {
 class _ChatPage extends State<ChatPage> {
 
   double _currentLEDValue = 10;
+  int listLength = 0;
+  bool isSpeakEnable = true;
+
+  double _currentSoundValue = 0.5;
 
   static final clientID = 0;
   BluetoothConnection connection;
@@ -55,12 +60,14 @@ class _ChatPage extends State<ChatPage> {
 
   bool isDisconnecting = false;
 
-  Future speak(String text) async {
-    await tts.setLanguage('en-gb');
-    await tts.setPitch(2);
-    // await tts.setSpeechRate(0.4);
-    await tts.speak(text);
-    // print(await tts.getLanguages);
+  Future speak(String text, bool isSpeak) async {
+    if (isSpeak) {
+      await tts.setLanguage('en-gb');
+      await tts.setPitch(2);
+      // await tts.setSpeechRate(0.4);
+      await tts.speak(text);
+      // print(await tts.getLanguages);
+    }
   }
 
   Future stop() async {
@@ -119,10 +126,11 @@ class _ChatPage extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     final List<Row> list = messages.map((_message) {
+      // print(messages.length);
+      // isSpeakEnable = true;
       alert = _message.text.trim();
-      setState(() {
-        speak(alert);
-      });
+      speak(alert, isSpeakEnable);
+
       return Row(
         children: <Widget>[
           Container(
@@ -177,7 +185,7 @@ class _ChatPage extends State<ChatPage> {
           title: (isConnecting
               ? Text('Connecting chat to ' + widget.server.name + '...')
               : isConnected
-                  ? Text('Live chat with ' + widget.server.name)
+                  ? Text('Live connecting with ' + widget.server.name)
                   : Text('Chat log with ' + widget.server.name))),
       body: SafeArea(
         child: Column(
@@ -187,12 +195,39 @@ class _ChatPage extends State<ChatPage> {
                   padding: const EdgeInsets.all(12.0),
                   controller: listScrollController,
                   children: <Widget>[
-                    Text(alert),
+                    SizedBox(
+                      height: 80.0,
+                    ),
+                    Card(
+                      elevation: 1,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Colors.black
+                        ),
+                        borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      ),
+                      child: SizedBox(
+                        width: 300,
+                        height: 100,
+                        child: Center(
+                            child: Text(
+                              alert,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
+                            ),
+                        ),
+                      ),
+                    ),
+
+
                     // speak(alert),
-                    TextButton(onPressed: () {
-                      speak(alert);
-                    }, child: Text('Speak')),
-                    const Text("LED", textAlign: TextAlign.center,),
+                    // TextButton(onPressed: () {
+                    //   speak(alert);
+                    // }, child: Text('Speak')),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    const Text("LED BRIGHTNESS", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
                     const Divider(),
                     Slider(
                       min: 0.0,
@@ -202,10 +237,33 @@ class _ChatPage extends State<ChatPage> {
                       label: '${_currentLEDValue.round()}',
                       onChanged: (value) {
                         setState(() {
+                          isSpeakEnable = false;
                           _currentLEDValue = value;
                           _sendMessage(_currentLEDValue.toString());
                         });
                       },
+                    ),
+                    SizedBox(
+                      height: 50.0,
+                    ),
+                    Text("Current Volume: ${(_currentSoundValue * 100).toInt()}", textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
+
+                    const Divider(),
+
+                    Slider(
+                      value: _currentSoundValue,
+                      label: '${(_currentSoundValue * 100).toInt()}',
+                      onChanged: (newvol){
+                        _currentSoundValue = newvol;
+                        PerfectVolumeControl.setVolume(newvol);
+                        //set new volume
+                        setState(() {
+                          // _currentSoundValue = newvol;
+                        });
+                      },
+                      min: 0, //
+                      max:  1,
+                      divisions: 10,
                     ),
                   ]
               ),
