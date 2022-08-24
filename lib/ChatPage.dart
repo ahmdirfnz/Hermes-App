@@ -21,15 +21,28 @@ class _Message {
   _Message(this.whom, this.text);
 }
 
+class _LED {
+  int whom;
+  String text;
+
+  _LED(this.whom, this.text);
+}
+
 class _ChatPage extends State<ChatPage> {
+
+  double _currentLEDValue = 10;
+
   static final clientID = 0;
   BluetoothConnection connection;
 
   final FlutterTts tts = FlutterTts();
 
   List<_Message> messages = List<_Message>();
-  _Message message;
+  // _Message message;
   String _messageBuffer = '';
+
+  List<_LED> brightnessled = List<_LED>();
+  String _ledBuffer = '';
 
   String alert = '';
 
@@ -50,6 +63,10 @@ class _ChatPage extends State<ChatPage> {
     // print(await tts.getLanguages);
   }
 
+  Future stop() async {
+    await tts.stop();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -60,6 +77,7 @@ class _ChatPage extends State<ChatPage> {
       setState(() {
         isConnecting = false;
         isDisconnecting = false;
+
       });
 
       connection.input.listen(_onDataReceived).onDone(() {
@@ -75,7 +93,9 @@ class _ChatPage extends State<ChatPage> {
           print('Disconnected remotely!');
         }
         if (this.mounted) {
-          setState(() {});
+          setState(() {
+
+          });
         }
       });
     }).catchError((error) {
@@ -100,7 +120,9 @@ class _ChatPage extends State<ChatPage> {
   Widget build(BuildContext context) {
     final List<Row> list = messages.map((_message) {
       alert = _message.text.trim();
-      speak(alert);
+      setState(() {
+        speak(alert);
+      });
       return Row(
         children: <Widget>[
           Container(
@@ -119,6 +141,32 @@ class _ChatPage extends State<ChatPage> {
           ),
         ],
         mainAxisAlignment: _message.whom == clientID
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+      );
+    }).toList();
+
+    final List<Row> listLED = brightnessled.map((_led) {
+      // alert = _led.text.trim();
+      // speak(alert);
+      return Row(
+        children: <Widget>[
+          Container(
+            child: Text(
+                    (text) {
+                  return text == '/shrug' ? '¯\\_(ツ)_/¯' : text;
+                }(_led.text.trim()),
+                style: TextStyle(color: Colors.white)),
+            padding: EdgeInsets.all(12.0),
+            margin: EdgeInsets.only(bottom: 8.0, left: 8.0, right: 8.0),
+            width: 222.0,
+            decoration: BoxDecoration(
+                color:
+                _led.whom == clientID ? Colors.blueAccent : Colors.grey,
+                borderRadius: BorderRadius.circular(7.0)),
+          ),
+        ],
+        mainAxisAlignment: _led.whom == clientID
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
       );
@@ -143,8 +191,24 @@ class _ChatPage extends State<ChatPage> {
                     // speak(alert),
                     TextButton(onPressed: () {
                       speak(alert);
-                    }, child: Text('Speak'))
-                  ]),
+                    }, child: Text('Speak')),
+                    const Text("LED", textAlign: TextAlign.center,),
+                    const Divider(),
+                    Slider(
+                      min: 0.0,
+                      max: 100.0,
+                      value: _currentLEDValue,
+                      divisions: 10,
+                      label: '${_currentLEDValue.round()}',
+                      onChanged: (value) {
+                        setState(() {
+                          _currentLEDValue = value;
+                          _sendMessage(_currentLEDValue.toString());
+                        });
+                      },
+                    ),
+                  ]
+              ),
             ),
             Row(
               children: <Widget>[
@@ -193,6 +257,8 @@ class _ChatPage extends State<ChatPage> {
     Uint8List buffer = Uint8List(data.length - backspacesCounter);
     int bufferIndex = buffer.length;
 
+
+
     // Apply backspace control character
     backspacesCounter = 0;
     for (int i = data.length - 1; i >= 0; i--) {
@@ -212,6 +278,7 @@ class _ChatPage extends State<ChatPage> {
     int index = buffer.indexOf(13);
     if (~index != 0) {
       setState(() {
+        // speak(alert);
         messages.add(
           _Message(
             1,
@@ -222,6 +289,7 @@ class _ChatPage extends State<ChatPage> {
           ),
         );
         _messageBuffer = dataString.substring(index);
+
       });
     } else {
       _messageBuffer = (backspacesCounter > 0
@@ -229,11 +297,13 @@ class _ChatPage extends State<ChatPage> {
               0, _messageBuffer.length - backspacesCounter)
           : _messageBuffer + dataString);
     }
+
   }
 
   void _sendMessage(String text) async {
     text = text.trim();
-    textEditingController.clear();
+    // textEditingController.clear();
+    // stop();
 
     if (text.length > 0) {
       try {
@@ -241,7 +311,7 @@ class _ChatPage extends State<ChatPage> {
         await connection.output.allSent;
 
         setState(() {
-          messages.add(_Message(clientID, text));
+          brightnessled.add(_LED(clientID, text));
         });
 
         Future.delayed(Duration(milliseconds: 333)).then((_) {
