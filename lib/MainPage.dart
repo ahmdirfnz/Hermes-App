@@ -210,14 +210,15 @@ class _MainPage extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title:  Text('HERMES', style: GoogleFonts.chakraPetch(textStyle: const TextStyle(fontWeight: FontWeight.bold)),),
+        backgroundColor: Colors.deepPurple,
+        title:  Text('HERMES', style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontWeight: FontWeight.bold)),),
         centerTitle: true,
         actions: [
           IconButton(
               onPressed: (){},
-              icon: const Icon(Icons.share))
+              icon: const Icon(Icons.share,))
         ],
+        // iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer:  Drawer(
         child: ListView(
@@ -225,6 +226,9 @@ class _MainPage extends State<MainPage> {
           padding: EdgeInsets.zero,
           children: [
             const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.deepPurpleAccent
+              ),
               accountName: Text('Ahmad Irfan'),
               accountEmail: Text('irfanz6985@gmail.com'),
               currentAccountPicture: AvatarView(
@@ -233,7 +237,7 @@ class _MainPage extends State<MainPage> {
                 isOnlyText: false,
                 text: Text('C', style: TextStyle(color: Colors.white, fontSize: 50),),
                 avatarType: AvatarType.CIRCLE,
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.deepPurpleAccent,
                 imagePath: 'assets/images/account.png',
                 placeHolder: Icon(Icons.person, size: 50,),
                 errorWidget: Icon(Icons.error, size: 50,),
@@ -276,6 +280,7 @@ class _MainPage extends State<MainPage> {
           ),
           SwitchListTile(
               title: const Text('Turn on bluetooth'),
+              activeColor: Colors.deepPurpleAccent,
               value: _bluetoothState.isEnabled,
               onChanged: (bool value) {
                 // Do the request and update with the true value then
@@ -296,6 +301,9 @@ class _MainPage extends State<MainPage> {
             title: const Text('Bluetooth setting'),
             subtitle: Text(_bluetoothState.toString()),
             trailing: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.deepPurpleAccent
+              ),
                 child: const Text('Settings'),
                 onPressed: () {
                   FlutterBluetoothSerial.instance.openSettings();

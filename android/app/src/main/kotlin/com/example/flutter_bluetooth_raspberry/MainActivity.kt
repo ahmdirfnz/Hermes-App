@@ -1,4 +1,4 @@
-package com.example.flutter_bluetooth_raspberry
+package com.example.hermes_app
 
 import io.flutter.embedding.android.FlutterActivity
 

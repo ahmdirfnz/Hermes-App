@@ -127,7 +127,7 @@ class _ChatPage extends State<ChatPage> {
   Widget build(BuildContext context) {
     final List<Row> list = messages.map((_message) {
       // print(messages.length);
-      // isSpeakEnable = true;
+      isSpeakEnable = true;
       alert = _message.text.trim();
       speak(alert, isSpeakEnable);
 
