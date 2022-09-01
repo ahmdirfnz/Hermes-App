@@ -325,6 +325,7 @@ class _MainPage extends State<MainPage> {
                 ]
               ),
               child: Card(
+                color: Colors.white,
                 elevation: 10,
                 shape: const RoundedRectangleBorder(
                   side: BorderSide(

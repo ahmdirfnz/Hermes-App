@@ -32,6 +32,7 @@ class _LED {
 class _ChatPage extends State<ChatPage> {
 
   double _currentLEDValue = 10;
+  int _currentLEDValueInt = 10;
   int listLength = 0;
   bool isSpeakEnable = true;
 
@@ -239,7 +240,8 @@ class _ChatPage extends State<ChatPage> {
                         setState(() {
                           isSpeakEnable = false;
                           _currentLEDValue = value;
-                          _sendMessage(_currentLEDValue.toString());
+                          _currentLEDValueInt = _currentLEDValue.toInt();
+                          _sendMessage(_currentLEDValueInt.toString());
                         });
                       },
                     ),
@@ -365,7 +367,7 @@ class _ChatPage extends State<ChatPage> {
 
     if (text.length > 0) {
       try {
-        connection.output.add(utf8.encode(text + "\r\n"));
+        connection.output.add(utf8.encode(text));
         await connection.output.allSent;
 
         setState(() {
