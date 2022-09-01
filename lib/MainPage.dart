@@ -276,7 +276,7 @@ class _MainPage extends State<MainPage> {
       body: ListView(
         children: [
           SizedBox(
-            height: 50.0,
+            height: 20.0,
           ),
           SwitchListTile(
               title: const Text('Turn on bluetooth'),
@@ -311,100 +311,114 @@ class _MainPage extends State<MainPage> {
             ),
           ),
           Divider(),
+          SizedBox(
+            height: 20.0,
+          ),
           Center(
-            child: Card(
-              elevation: 1,
-              shape: const RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.black,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.blueAccent,
+                    blurRadius: 13.0,
+                  )
+                ]
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: 340,
-                  height: 210,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'Hermes Devices',
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children:  [
-                          Image.asset(_headsetState == HeadsetState.CONNECT ? 'assets/images/headsetBlue.png' : 'assets/images/headsetGrey.png', height: 100, width: 70,),
-                          IconButton(onPressed: () async {
+              child: Card(
+                elevation: 10,
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(
+                    color: Colors.deepPurple,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 340,
+                    height: 210,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Hermes Devices',
+                              style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontSize: 25)),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children:  [
+                            Image.asset(_headsetState == HeadsetState.CONNECT ? 'assets/images/headsetBlue.png' : 'assets/images/headsetGrey.png', height: 100, width: 70,),
+                            IconButton(onPressed: () async {
 
-                            final BluetoothDevice selectedDevice =
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return SelectBondedDevicePage(checkAvailability: false);
-                                },
-                              ),
-                            );
+                              final BluetoothDevice selectedDevice =
+                              await Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return SelectBondedDevicePage(checkAvailability: false);
+                                  },
+                                ),
+                              );
 
-                            if (selectedDevice != null) {
-                              print('Connect -> selected ' + selectedDevice.address);
-                              _startChat(context, selectedDevice);
-                            } else {
-                              print('Connect -> no device selected');
-                            }
+                              if (selectedDevice != null) {
+                                print('Connect -> selected ' + selectedDevice.address);
+                                _startChat(context, selectedDevice);
+                              } else {
+                                print('Connect -> no device selected');
+                              }
 
-                          },
-                              icon: Image.asset('assets/images/wifiPhoneGrey.png'),
-                            iconSize: 65,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      const Divider(
-                        indent: 16,
-                        endIndent: 16,
-                        color: Colors.grey,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children:  [
-                          const SizedBox(
-                            width: 16,
-                          ),
-                          _headsetState == HeadsetState.CONNECT ? Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  const [
-                              Text('Headset Device', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
-                              ),
-                              Text(
-                                'Connected',
-                                style: TextStyle(fontSize: 15, color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ) : Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children:  const [
-                              Text('Headset Device', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
-                              ),
-                              Text(
-                                'Not Connected',
-                                style: TextStyle(fontSize: 15, color: Colors.grey),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                            },
+                                icon: Image.asset('assets/images/wifiPhoneGrey.png'),
+                              iconSize: 65,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        const Divider(
+                          indent: 16,
+                          endIndent: 16,
+                          thickness: 0.7,
+                          color: Colors.grey,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:  [
+                            const SizedBox(
+                              width: 16,
+                            ),
+                            _headsetState == HeadsetState.CONNECT ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:  const [
+                                Text('Headset Device', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.blueAccent),
+                                ),
+                                Text(
+                                  'Connected',
+                                  style: TextStyle(fontSize: 15, color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ) : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children:  const [
+                                Text('Headset Device', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey),
+                                ),
+                                Text(
+                                  'Not Connected',
+                                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
