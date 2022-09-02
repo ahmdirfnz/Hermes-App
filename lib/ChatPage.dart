@@ -128,7 +128,7 @@ class _ChatPage extends State<ChatPage> {
   Widget build(BuildContext context) {
     final List<Row> list = messages.map((_message) {
       // print(messages.length);
-      isSpeakEnable = true;
+      // isSpeakEnable = true;
       alert = _message.text.trim();
       speak(alert, isSpeakEnable);
 
@@ -212,7 +212,7 @@ class _ChatPage extends State<ChatPage> {
                         height: 100,
                         child: Center(
                             child: Text(
-                              alert,
+                              isConnected ? alert : 'Device is disconnected',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
                             ),
@@ -257,6 +257,7 @@ class _ChatPage extends State<ChatPage> {
                       label: '${(_currentSoundValue * 100).toInt()}',
                       onChanged: (newvol){
                         _currentSoundValue = newvol;
+                        isSpeakEnable = false;
                         PerfectVolumeControl.setVolume(newvol);
                         //set new volume
                         setState(() {

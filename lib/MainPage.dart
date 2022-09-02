@@ -5,6 +5,7 @@ import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_raspberry/models/communication.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:headset_connection_event/headset_event.dart';
@@ -89,6 +90,7 @@ class _MainPage extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    initialization();
 
     // BluetoothConnection.toAddress(widget.server.address).then((_connection) {
     //   print('Connected to the device');
@@ -182,6 +184,21 @@ class _MainPage extends State<MainPage> {
         _bluetoothState = state;
       });
     });
+  }
+
+  void initialization() async {
+    // This is where you can initialize the resources needed by your app while
+    // the splash screen is displayed.  Remove the following example because
+    // delaying the user experience is a bad design practice!
+    // ignore_for_file: avoid_print
+    // print('ready in 3...');
+    // await Future.delayed(const Duration(seconds: 1));
+    // print('ready in 2...');
+    // await Future.delayed(const Duration(seconds: 1));
+    // print('ready in 1...');
+    // await Future.delayed(const Duration(seconds: 1));
+    // print('go!');
+    FlutterNativeSplash.remove();
   }
 
   // This code is just a example if you need to change page and you need to communicate to the raspberry again
@@ -319,8 +336,8 @@ class _MainPage extends State<MainPage> {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.blueAccent,
-                    blurRadius: 13.0,
+                    color: _headsetState == HeadsetState.CONNECT ? Colors.blueAccent : Colors.transparent,
+                    blurRadius: _headsetState == HeadsetState.CONNECT ? 13.0 : 0.0,
                   )
                 ]
               ),
@@ -329,7 +346,8 @@ class _MainPage extends State<MainPage> {
                 elevation: 10,
                 shape: const RoundedRectangleBorder(
                   side: BorderSide(
-                    color: Colors.deepPurple,
+                    color: Colors.blue,
+                    width: 2.4,
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(15)),
                 ),
@@ -337,9 +355,12 @@ class _MainPage extends State<MainPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
                     width: 340,
-                    height: 210,
+                    height: 215,
                     child: Column(
                       children: [
+                        SizedBox(
+                          height: 3.8,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -380,11 +401,11 @@ class _MainPage extends State<MainPage> {
                         const SizedBox(
                           height: 5,
                         ),
-                        const Divider(
+                        Divider(
                           indent: 16,
                           endIndent: 16,
-                          thickness: 0.7,
-                          color: Colors.grey,
+                          thickness: 0.9,
+                          color: _headsetState == HeadsetState.CONNECT ? Colors.black : Colors.grey,
                         ),
                         const SizedBox(
                           height: 10,
