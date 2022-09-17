@@ -128,7 +128,7 @@ class _ChatPage extends State<ChatPage> {
   Widget build(BuildContext context) {
     final List<Row> list = messages.map((_message) {
       // print(messages.length);
-      // isSpeakEnable = true;
+      isSpeakEnable = true;
       alert = _message.text.trim();
       speak(alert, isSpeakEnable);
 
@@ -183,6 +183,7 @@ class _ChatPage extends State<ChatPage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
           title: (isConnecting
               ? Text('Connecting chat to ' + widget.server.name + '...')
               : isConnected
@@ -212,7 +213,7 @@ class _ChatPage extends State<ChatPage> {
                         height: 100,
                         child: Center(
                             child: Text(
-                              isConnected ? alert : 'Device is disconnected',
+                              'Cone Detected',
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
                             ),
