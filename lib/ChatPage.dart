@@ -213,7 +213,7 @@ class _ChatPage extends State<ChatPage> {
                         height: 100,
                         child: Center(
                             child: Text(
-                              'Cone Detected',
+                              alert,
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.orangeAccent),
                             ),

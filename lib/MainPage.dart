@@ -42,6 +42,10 @@ class _MainPage extends State<MainPage> {
   new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
 
+  String bluetoothName = '';
+
+  // BluetoothDevice namebluetooth = SelectBondedDevicePage(checkAvailability: false,)
+
   bool isConnecting = true;
   bool get isConnected => connection != null && connection.isConnected;
 
@@ -225,6 +229,7 @@ class _MainPage extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    BluetoothDevice nameBluetooth;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -384,6 +389,10 @@ class _MainPage extends State<MainPage> {
                                   },
                                 ),
                               );
+
+                              // bluetoothName = selectedDevice.name;
+
+                              // print(selectedDevice.name);
 
                               if (selectedDevice != null) {
                                 print('Connect -> selected ' + selectedDevice.address);
