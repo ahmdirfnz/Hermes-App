@@ -371,7 +371,7 @@ class _MainPage extends State<MainPage> {
                           children: [
                             Text(
                               'Hermes Devices',
-                              style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontSize: 25)),
+                              style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),

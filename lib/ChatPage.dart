@@ -64,7 +64,7 @@ class _ChatPage extends State<ChatPage> {
   Future speak(String text, bool isSpeak) async {
     if (isSpeak) {
       await tts.setLanguage('en-gb');
-      await tts.setPitch(2);
+      await tts.setPitch(1);
       // await tts.setSpeechRate(0.4);
       await tts.speak(text);
       // print(await tts.getLanguages);
@@ -240,6 +240,7 @@ class _ChatPage extends State<ChatPage> {
                       onChanged: (value) {
                         setState(() {
                           isSpeakEnable = false;
+                          // speak("Welcome", true);
                           _currentLEDValue = value;
                           _currentLEDValueInt = _currentLEDValue.toInt();
                           _sendMessage(_currentLEDValueInt.toString());
