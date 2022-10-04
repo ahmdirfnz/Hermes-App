@@ -219,6 +219,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.2.0"
+  instagram_share:
+    dependency: "direct main"
+    description:
+      name: instagram_share
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   js:
     dependency: transitive
     description:
@@ -269,7 +276,7 @@ packages:
     source: hosted
     version: "1.8.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -371,6 +378,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  social_share:
+    dependency: "direct main"
+    description:
+      name: social_share
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.1"
   source_span:
     dependency: transitive
     description:

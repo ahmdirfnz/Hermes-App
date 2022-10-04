@@ -35,6 +35,9 @@ dependencies:
   headset_connection_event: ^2.1.1
   flutter_tts: ^3.5.1
   flutter_native_splash: ^2.2.8
+  instagram_share: ^0.2.0
+  social_share: ^2.2.1
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
@@ -85,11 +88,11 @@ flutter_native_splash:
 
   color: "#FFFFFF"
   #background_image: "assets/background.png"
-  image: assets/images/hermes2.png
+  image: assets/images/newlogo3.png
 
   color_dark: "#FFFFFF"
   #background_image_dark: "assets/dark-background.png"
-  image_dark: assets/images/hermes2.png
+  image_dark: assets/images/newlogo3.png
   #branding_dark: assets/dart_dark.png
 
   # Android 12 handles the splash screen differently than previous versions.  Please visit

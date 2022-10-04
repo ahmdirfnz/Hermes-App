@@ -232,6 +232,9 @@ class _ChatPage extends State<ChatPage> {
                     const Text("LED BRIGHTNESS", style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
                     const Divider(),
                     Slider(
+                      activeColor: Colors.yellowAccent,
+                      inactiveColor: Colors.grey,
+                      thumbColor: Colors.deepPurpleAccent,
                       min: 0.0,
                       max: 100.0,
                       value: _currentLEDValue,
@@ -255,6 +258,7 @@ class _ChatPage extends State<ChatPage> {
                     const Divider(),
 
                     Slider(
+                      activeColor: Colors.deepPurpleAccent,
                       value: _currentSoundValue,
                       label: '${(_currentSoundValue * 100).toInt()}',
                       onChanged: (newvol){

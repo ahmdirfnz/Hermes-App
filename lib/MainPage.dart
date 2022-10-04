@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_raspberry/models/communication.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -13,6 +15,9 @@ import 'package:perfect_volume_control/perfect_volume_control.dart';
 
 import './SelectBondedDevicePage.dart';
 import './ChatPage.dart';
+// import 'package:instagram_share/instagram_share.dart';
+import 'package:social_share/social_share.dart';
+import 'package:path_provider/path_provider.dart';
 //import './ChatPage2.dart';
 
 
@@ -237,7 +242,23 @@ class _MainPage extends State<MainPage> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: (){},
+              onPressed: () async {
+                Directory tempDir = await getTemporaryDirectory();
+                String tempPath = tempDir.path;
+                File file = File(tempDir.path+'/newlogo3.png');
+                final byteData = await rootBundle.load('assets/images/newlogo3.png');
+                await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+                await SocialShare.shareInstagramStory(file.path);
+                Navigator.of(context).pop();
+                // SocialShare.shareTwitter(
+                //   "Hermes App",
+                //   hashtags: ["SHELLSELAMATSAMPAI", "Hermes", "UTeM", "FTKEE"],
+                //   url: "https://play.google.com/store/apps/details?id=com.hermes.hermes_app",
+                //   trailingText: "\nHermes App",
+                //   ).then((data) {
+                //   print(data);
+                // });
+              },
               icon: const Icon(Icons.share,))
         ],
         // iconTheme: IconThemeData(color: Colors.black),
