@@ -243,21 +243,21 @@ class _MainPage extends State<MainPage> {
         actions: [
           IconButton(
               onPressed: () async {
-                Directory tempDir = await getTemporaryDirectory();
-                String tempPath = tempDir.path;
-                File file = File(tempDir.path+'/newlogo3.png');
-                final byteData = await rootBundle.load('assets/images/newlogo3.png');
-                await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-                await SocialShare.shareInstagramStory(file.path);
-                Navigator.of(context).pop();
-                // SocialShare.shareTwitter(
-                //   "Hermes App",
-                //   hashtags: ["SHELLSELAMATSAMPAI", "Hermes", "UTeM", "FTKEE"],
-                //   url: "https://play.google.com/store/apps/details?id=com.hermes.hermes_app",
-                //   trailingText: "\nHermes App",
-                //   ).then((data) {
-                //   print(data);
-                // });
+                // Directory tempDir = await getTemporaryDirectory();
+                // String tempPath = tempDir.path;
+                // File file = File(tempDir.path+'/newlogo3.png');
+                // final byteData = await rootBundle.load('assets/images/newlogo3.png');
+                // await file.writeAsBytes(byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+                // await SocialShare.shareInstagramStory(file.path);
+                // Navigator.of(context).pop();
+                SocialShare.shareTwitter(
+                  "Hermes App",
+                  hashtags: ["SHELLSELAMATSAMPAI", "Hermes", "UTeM", "FTKEE"],
+                  url: "https://play.google.com/store/apps/details?id=com.hermes.hermes_app",
+                  trailingText: "\nHermes App",
+                  ).then((data) {
+                  print(data);
+                });
               },
               icon: const Icon(Icons.share,))
         ],
