@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:ui';
 import 'package:avatar_view/avatar_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -238,7 +239,12 @@ class _MainPage extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title:  Text('HERMES', style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontWeight: FontWeight.bold)),),
+        title:  Text('HERMES', style: TextStyle(
+          fontFamily: 'Fredoka One',
+          fontWeight: FontWeight.bold,
+          fontSize: 25,
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -390,9 +396,11 @@ class _MainPage extends State<MainPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Hermes Devices',
-                              style: GoogleFonts.fredokaOne(textStyle: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                            Text('HERMES', style: TextStyle(
+                              fontFamily: 'Fredoka One',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                            ),
                             ),
                           ],
                         ),
