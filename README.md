@@ -7,11 +7,11 @@ A Flutter project to connect app with raspberry pi via bluetooth
 <table>
 <tr>
 
-<td><img src="/assets/images/newlogo3.png" alt="Alt text" title="Hermes Logo" width="250" height="370"></td>
+<td><img src="/assets/images/newlogo3.png" alt="Alt text" title="Hermes Logo" width="200" height="370"></td>
 
-<td><img src="/assets/images/mainPage.jpeg" alt="Alt text" title="Hermes Logo" width="250" height="370"></td>
+<td><img src="/assets/images/mainPage.jpeg" alt="Alt text" title="Hermes Logo" width="200" height="370"></td>
 
-<td><img src="/assets/images/mainPageConnected.jpeg" alt="Alt text" title="Hermes Logo" width="250" height="370"></td>
+<td><img src="/assets/images/mainPageConnected.jpeg" alt="Alt text" title="Hermes Logo" width="200" height="370"></td>
 
 </tr>
 
