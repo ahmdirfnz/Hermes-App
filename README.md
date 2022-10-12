@@ -2,7 +2,7 @@
 
 A Flutter project to connect app with raspberry pi via bluetooth
 
-![Alt text](/assets/images/newlogo3.png "Hermes Logo" | width: "200" height: "400")
+![Alt text](/assets/images/newlogo3.png "Hermes Logo" =200x400)
 
 ## Getting Started
 
