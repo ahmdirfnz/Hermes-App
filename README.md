@@ -15,6 +15,14 @@ A Flutter project to connect app with raspberry pi via bluetooth
 
 </tr>
 
+<tr>
+
+<td><img src="/assets/images/profilePage.jpeg" alt="Alt text" title="Hermes Logo" width="250" height="350"></td>
+
+<td><img src="/assets/images/notificationPage.jpeg" alt="Alt text" title="Hermes Logo" width="250" height="350"></td>
+
+</tr>
+
 </table>
 
 
