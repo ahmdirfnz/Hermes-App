@@ -2,7 +2,6 @@
 
 A Flutter project to connect app with raspberry pi via bluetooth
 
-
 <table>
 <tr>
 
