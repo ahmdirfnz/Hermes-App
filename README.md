@@ -24,4 +24,7 @@ A Flutter project to connect app with raspberry pi via bluetooth
 
 ## Get The App In PlayStore Now
 
-[Hermess App] (https://play.google.com/store/apps/details?id=com.hermes.hermes_app)
+### Link: https://play.google.com/store/apps/details?id=com.hermes.hermes_app
+
+### QR Code: 
+<img src="/assets/images/hermesQR.jpeg" alt="Alt text" title="Hermes QR Code" width="300" height="300">
