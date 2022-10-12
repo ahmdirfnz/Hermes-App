@@ -1,6 +1,8 @@
-# flutter_bluetooth_raspberry
+# Hermes App
 
-A Flutter project for communicating with a raspberry pi.
+A Flutter project to connect app with raspberry pi via bluetooth
+
+![Alt text](/assets/images/hermesLogo.png "Hermes Logo")
 
 ## Getting Started
 
